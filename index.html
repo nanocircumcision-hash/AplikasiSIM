@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Safe HMR handling for cloud proxy / iframe environment
+      (function() {
+        if (typeof window === 'undefined') return;
+
+        window.addEventListener('unhandledrejection', function(event) {
+          var reason = '' + (event && (event.reason?.message || event.reason?.stack || event.reason || ''));
+          if (reason.indexOf('WebSocket') !== -1 || reason.indexOf('vite') !== -1 || reason.indexOf('@vite/client') !== -1) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+
+        window.addEventListener('error', function(event) {
+          var msg = '' + (event?.message || '');
+          var filename = '' + (event?.filename || '');
+          if (msg.indexOf('WebSocket') !== -1 || filename.indexOf('@vite/client') !== -1 || (event?.error && String(event.error).indexOf('@vite/client') !== -1)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+
+        if (typeof window.WebSocket !== 'undefined') {
+          var NativeWebSocket = window.WebSocket;
+          window.WebSocket = function(url, protocols) {
+            var isVite = (typeof protocols === 'string' && (protocols === 'vite-hmr' || protocols === 'vite-ping')) ||
+                         (Array.isArray(protocols) && (protocols.indexOf('vite-hmr') !== -1 || protocols.indexOf('vite-ping') !== -1));
+            if (isVite) {
+              var target = new EventTarget();
+              target.readyState = 1;
+              target.send = function() {};
+              target.close = function() { target.readyState = 3; };
+              setTimeout(function() {
+                var openEv = new Event('open');
+                target.dispatchEvent(openEv);
+                if (typeof target.onopen === 'function') target.onopen(openEv);
+              }, 0);
+              return target;
+            }
+            return new NativeWebSocket(url, protocols);
+          };
+          window.WebSocket.prototype = NativeWebSocket.prototype;
+          window.WebSocket.CONNECTING = 0;
+          window.WebSocket.OPEN = 1;
+          window.WebSocket.CLOSING = 2;
+          window.WebSocket.CLOSED = 3;
+        }
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/branding/nano-app-icon.svg" />
+    <link rel="alternate icon" type="image/png" href="/branding/nano-app-icon.png" />
+    <link rel="apple-touch-icon" href="/branding/nano-app-icon.png" />
+    <title>CLINIC MANAGEMENT SYSTEM</title>
+    <meta name="description" content="Sistem Manajemen Operasional Khusus Tindakan Khitan Nano Circumcision: Pasien, Booking, Tindakan Medis, Kasir, Fee Dokter, dan Laba Rugi." />
+    <meta property="og:title" content="CLINIC MANAGEMENT SYSTEM" />
+    <meta property="og:description" content="Sistem Manajemen Operasional Khusus Tindakan Khitan Nano Circumcision: Pasien, Booking, Tindakan Medis, Kasir, Fee Dokter, dan Laba Rugi." />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#F8FAFC] text-slate-900 antialiased selection:bg-orange-500 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

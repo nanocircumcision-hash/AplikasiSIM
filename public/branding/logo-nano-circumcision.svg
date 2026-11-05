@@ -1,0 +1,394 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 640" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="sunatYellow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF066" />
+      <stop offset="60%" stop-color="#FFCC00" />
+      <stop offset="100%" stop-color="#E5A700" />
+    </linearGradient>
+
+    <linearGradient id="nanoN1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF2A55" />
+      <stop offset="50%" stop-color="#FF5E3A" />
+      <stop offset="100%" stop-color="#FF9500" />
+    </linearGradient>
+
+    <linearGradient id="nanoA" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE600" />
+      <stop offset="50%" stop-color="#FFAE00" />
+      <stop offset="100%" stop-color="#FF8800" />
+    </linearGradient>
+
+    <linearGradient id="nanoN2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#55E642" />
+      <stop offset="50%" stop-color="#28C840" />
+      <stop offset="100%" stop-color="#189E30" />
+    </linearGradient>
+
+    <linearGradient id="nanoO" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0088FF" />
+      <stop offset="50%" stop-color="#0066E6" />
+      <stop offset="100%" stop-color="#004CBD" />
+    </linearGradient>
+
+    <linearGradient id="carBodyBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E4CB8" />
+      <stop offset="40%" stop-color="#123693" />
+      <stop offset="100%" stop-color="#0A2268" />
+    </linearGradient>
+
+    <linearGradient id="carHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B7DFF" />
+      <stop offset="100%" stop-color="#1E4CB8" />
+    </linearGradient>
+
+    <linearGradient id="headlightAmber" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF275" />
+      <stop offset="60%" stop-color="#FF9900" />
+      <stop offset="100%" stop-color="#CC6600" />
+    </linearGradient>
+
+    <linearGradient id="pawGold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE066" />
+      <stop offset="100%" stop-color="#E59900" />
+    </linearGradient>
+
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.25" />
+    </filter>
+
+    <filter id="whiteOutline">
+      <feMorphology operator="dilate" radius="3" in="SourceAlpha" result="dilated" />
+      <feFlood flood-color="#FFFFFF" result="white" />
+      <feComposite in="white" in2="dilated" operator="in" result="outline" />
+      <feMerge>
+        <feMergeNode in="outline" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- ========================================== -->
+  <!-- 1. TOP CURVED TEXT: "SUNAT" -->
+  <!-- ========================================== -->
+  <g id="sunat-text" filter="url(#softShadow)">
+    <!-- Dark Blue Outline/Extrusion -->
+    <path d="M 125 105 C 130 50, 390 50, 395 105" fill="none" />
+    <!-- Letter S -->
+    <text x="135" y="105" font-family="'Arial Black', 'Impact', sans-serif" font-size="68" font-weight="900" fill="#0D2E7A" stroke="#0D2E7A" stroke-width="14" stroke-linejoin="round">S</text>
+    <text x="135" y="105" font-family="'Arial Black', 'Impact', sans-serif" font-size="68" font-weight="900" fill="url(#sunatYellow)">S</text>
+
+    <!-- Letter U -->
+    <text x="180" y="82" font-family="'Arial Black', 'Impact', sans-serif" font-size="68" font-weight="900" fill="#0D2E7A" stroke="#0D2E7A" stroke-width="14" stroke-linejoin="round">U</text>
+    <text x="180" y="82" font-family="'Arial Black', 'Impact', sans-serif" font-size="68" font-weight="900" fill="url(#sunatYellow)">U</text>
+
+    <!-- Letter N -->
+    <text x="238" y="74" font-family="'Arial Black', 'Impact', sans-serif" font-size="70" font-weight="900" fill="#0D2E7A" stroke="#0D2E7A" stroke-width="14" stroke-linejoin="round">N</text>
+    <text x="238" y="74" font-family="'Arial Black', 'Impact', sans-serif" font-size="70" font-weight="900" fill="url(#sunatYellow)">N</text>
+
+    <!-- Letter A -->
+    <text x="300" y="82" font-family="'Arial Black', 'Impact', sans-serif" font-size="68" font-weight="900" fill="#0D2E7A" stroke="#0D2E7A" stroke-width="14" stroke-linejoin="round">A</text>
+    <text x="300" y="82" font-family="'Arial Black', 'Impact', sans-serif" font-size="68" font-weight="900" fill="url(#sunatYellow)">A</text>
+
+    <!-- Letter T -->
+    <text x="355" y="105" font-family="'Arial Black', 'Impact', sans-serif" font-size="68" font-weight="900" fill="#0D2E7A" stroke="#0D2E7A" stroke-width="14" stroke-linejoin="round">T</text>
+    <text x="355" y="105" font-family="'Arial Black', 'Impact', sans-serif" font-size="68" font-weight="900" fill="url(#sunatYellow)">T</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. CAT MASCOTS (SUPERHERO TRIO) -->
+  <!-- ========================================== -->
+  <g id="cat-trio">
+    <!-- == -->
+    <!-- LEFT CAT: WHITE CAT IN BLUE CAPE -->
+    <!-- == -->
+    <g id="left-white-cat">
+      <!-- Blue cape -->
+      <path d="M 120 180 C 100 210, 110 270, 140 280 L 195 270 C 180 230, 160 190, 120 180 Z" fill="#0A50C2" stroke="#000" stroke-width="3" />
+      <path d="M 125 185 C 105 215, 115 260, 140 272" fill="none" stroke="#FFCC00" stroke-width="3" />
+      <!-- Body & Neck -->
+      <ellipse cx="165" cy="235" rx="35" ry="40" fill="#FFFFFF" stroke="#000" stroke-width="3.5" />
+      <path d="M 140 240 L 190 240 L 180 275 L 145 275 Z" fill="#F8FAFC" />
+      <!-- Head -->
+      <path d="M 125 180 C 115 150, 120 120, 130 115 C 140 110, 155 130, 160 135 C 175 130, 195 130, 205 135 C 215 130, 225 110, 235 118 C 242 125, 238 155, 230 180 C 240 205, 215 225, 180 225 C 140 225, 115 205, 125 180 Z" fill="#FFFFFF" stroke="#000" stroke-width="3.5" />
+      <!-- Ears interior -->
+      <path d="M 132 122 C 136 130, 142 140, 148 145" stroke="#FF85A1" stroke-width="3" fill="none" />
+      <path d="M 228 125 C 224 133, 218 142, 212 147" stroke="#FF85A1" stroke-width="3" fill="none" />
+      <!-- Dark patches on forehead/ear -->
+      <path d="M 132 118 C 138 135, 146 142, 140 152 C 135 142, 128 130, 132 118 Z" fill="#52525B" />
+      <!-- Cool Blue Sunglasses -->
+      <g id="white-cat-glasses">
+        <path d="M 135 155 Q 165 150 178 162 Q 165 178 142 178 Q 132 172 135 155 Z" fill="#0099FF" stroke="#000" stroke-width="3" />
+        <path d="M 182 162 Q 195 150 225 155 Q 228 172 218 178 Q 195 178 182 162 Z" fill="#0099FF" stroke="#000" stroke-width="3" />
+        <!-- Bridge -->
+        <path d="M 176 160 Q 180 158 184 160" stroke="#000" stroke-width="3" fill="none" />
+        <!-- Lens Glare -->
+        <path d="M 142 158 L 150 170" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" />
+        <path d="M 152 158 L 165 172" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" />
+        <path d="M 200 158 L 210 170" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" />
+      </g>
+      <!-- Nose & Mouth -->
+      <ellipse cx="180" cy="186" rx="3.5" ry="2.5" fill="#000" />
+      <path d="M 180 188 Q 174 195 168 192" stroke="#000" stroke-width="2" fill="none" />
+      <path d="M 180 188 Q 186 195 192 192" stroke="#000" stroke-width="2" fill="none" />
+      <!-- Whiskers -->
+      <line x1="130" y1="184" x2="110" y2="182" stroke="#000" stroke-width="1.8" />
+      <line x1="130" y1="190" x2="112" y2="194" stroke="#000" stroke-width="1.8" />
+      <!-- Raised Blue Glove / Paw -->
+      <path d="M 118 200 C 105 185, 85 200, 95 218 C 102 230, 118 235, 128 225 Z" fill="#0088FF" stroke="#000" stroke-width="3" />
+      <!-- Collar & Paw Medallion -->
+      <path d="M 155 220 Q 178 228 202 220" stroke="#FFCC00" stroke-width="5" fill="none" />
+      <circle cx="178" cy="226" r="6" fill="#FFB703" stroke="#000" stroke-width="1.5" />
+      <circle cx="178" cy="227" r="2" fill="#000" />
+    </g>
+
+    <!-- == -->
+    <!-- RIGHT CAT: BLACK/CHARCOAL HERO CAT -->
+    <!-- == -->
+    <g id="right-black-cat">
+      <!-- Cape -->
+      <path d="M 400 180 C 420 210, 410 270, 380 280 L 325 270 C 340 230, 360 190, 400 180 Z" fill="#E11D48" stroke="#000" stroke-width="3" />
+      <!-- Body -->
+      <ellipse cx="355" cy="235" rx="35" ry="40" fill="#27272A" stroke="#000" stroke-width="3.5" />
+      <!-- Head -->
+      <path d="M 395 180 C 405 150, 400 120, 390 115 C 380 110, 365 130, 360 135 C 345 130, 325 130, 315 135 C 305 130, 295 110, 285 118 C 278 125, 282 155, 290 180 C 280 205, 305 225, 340 225 C 380 225, 405 205, 395 180 Z" fill="#3F3F46" stroke="#000" stroke-width="3.5" />
+      <!-- Tiger Stripes -->
+      <path d="M 340 128 L 340 142" stroke="#18181B" stroke-width="3" />
+      <path d="M 330 130 L 333 144" stroke="#18181B" stroke-width="2.5" />
+      <path d="M 350 130 L 347 144" stroke="#18181B" stroke-width="2.5" />
+      <!-- Ears interior -->
+      <path d="M 388 122 C 384 130, 378 140, 372 145" stroke="#FF85A1" stroke-width="3" fill="none" />
+      <!-- Cool Gold/Amber Sunglasses -->
+      <g id="black-cat-glasses">
+        <path d="M 300 158 Q 312 150 335 155 Q 338 172 328 178 Q 305 178 300 158 Z" fill="#FFC700" stroke="#000" stroke-width="3" />
+        <path d="M 345 155 Q 368 150 380 162 Q 375 178 352 178 Q 342 172 345 155 Z" fill="#FFC700" stroke="#000" stroke-width="3" />
+        <path d="M 335 160 Q 340 158 345 160" stroke="#000" stroke-width="3" fill="none" />
+        <!-- Glare -->
+        <path d="M 315 158 L 325 170" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" />
+        <path d="M 360 158 L 370 170" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" />
+      </g>
+      <!-- Nose & Mouth -->
+      <ellipse cx="340" cy="186" rx="3.5" ry="2.5" fill="#000" />
+      <path d="M 340 188 Q 334 195 328 192" stroke="#000" stroke-width="2" fill="none" />
+      <path d="M 340 188 Q 346 195 352 192" stroke="#000" stroke-width="2" fill="none" />
+      <!-- Whiskers -->
+      <line x1="390" y1="184" x2="410" y2="182" stroke="#000" stroke-width="1.8" />
+      <line x1="390" y1="190" x2="408" y2="194" stroke="#000" stroke-width="1.8" />
+      <!-- Raised Fist! -->
+      <path d="M 405 185 C 415 170, 435 175, 432 198 C 428 212, 412 218, 400 210 Z" fill="#FBBF24" stroke="#000" stroke-width="3" />
+      <rect x="398" y="196" width="16" height="14" rx="4" fill="#DC2626" stroke="#000" stroke-width="2" />
+      <!-- Collar -->
+      <path d="M 318 220 Q 340 228 365 220" stroke="#E11D48" stroke-width="5" fill="none" />
+      <circle cx="342" cy="226" r="6" fill="#FFB703" stroke="#000" stroke-width="1.5" />
+      <circle cx="342" cy="227" r="2" fill="#000" />
+    </g>
+
+    <!-- == -->
+    <!-- CENTER CAT: ORANGE TABBY CAT LEADER -->
+    <!-- == -->
+    <g id="center-orange-cat">
+      <!-- Red Cape -->
+      <path d="M 215 190 C 190 230, 200 290, 230 300 L 290 300 C 320 290, 330 230, 305 190 Z" fill="#DC2626" stroke="#000" stroke-width="3.5" />
+      <!-- Body / Suit -->
+      <ellipse cx="260" cy="245" rx="42" ry="48" fill="#F8FAFC" stroke="#000" stroke-width="3.5" />
+      <text x="260" y="278" font-family="'Arial Black', sans-serif" font-size="11" font-weight="900" fill="#EAB308" text-anchor="middle" letter-spacing="1">NANO</text>
+      <!-- Head -->
+      <path d="M 210 185 C 195 150, 202 110, 215 105 C 228 100, 240 120, 246 128 C 255 125, 265 125, 274 128 C 280 120, 292 100, 305 105 C 318 110, 325 150, 310 185 C 320 215, 295 235, 260 235 C 225 235, 200 215, 210 185 Z" fill="#EA580C" stroke="#000" stroke-width="3.5" />
+      <!-- Forehead stripes -->
+      <path d="M 260 118 L 260 138" stroke="#C2410C" stroke-width="4" stroke-linecap="round" />
+      <path d="M 248 122 L 252 138" stroke="#C2410C" stroke-width="3.5" stroke-linecap="round" />
+      <path d="M 272 122 L 268 138" stroke="#C2410C" stroke-width="3.5" stroke-linecap="round" />
+      <!-- Cheek stripes -->
+      <path d="M 215 170 L 228 174" stroke="#C2410C" stroke-width="3" stroke-linecap="round" />
+      <path d="M 214 178 L 226 181" stroke="#C2410C" stroke-width="3" stroke-linecap="round" />
+      <path d="M 305 170 L 292 174" stroke="#C2410C" stroke-width="3" stroke-linecap="round" />
+      <path d="M 306 178 L 294 181" stroke="#C2410C" stroke-width="3" stroke-linecap="round" />
+      <!-- White Muzzle -->
+      <ellipse cx="260" cy="195" rx="20" ry="14" fill="#FFFFFF" />
+      <!-- Red Sunglasses -->
+      <g id="orange-cat-glasses">
+        <path d="M 218 152 Q 248 145 258 158 Q 248 175 225 174 Q 215 168 218 152 Z" fill="#EF4444" stroke="#000" stroke-width="3" />
+        <path d="M 262 158 Q 272 145 302 152 Q 305 168 295 174 Q 272 175 262 158 Z" fill="#EF4444" stroke="#000" stroke-width="3" />
+        <path d="M 256 156 Q 260 154 264 156" stroke="#000" stroke-width="3" fill="none" />
+        <!-- Glare -->
+        <path d="M 226 154 L 235 168" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" />
+        <path d="M 236 154 L 246 168" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" />
+        <path d="M 276 154 L 286 168" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" />
+        <path d="M 286 154 L 295 168" stroke="#FFF" stroke-width="2.5" stroke-linecap="round" />
+      </g>
+      <!-- Nose & Mouth -->
+      <polygon points="257,185 263,185 260,189" fill="#000" />
+      <path d="M 260 189 Q 254 196 248 193" stroke="#000" stroke-width="2" fill="none" />
+      <path d="M 260 189 Q 266 196 272 193" stroke="#000" stroke-width="2" fill="none" />
+      <!-- Whiskers -->
+      <line x1="216" y1="190" x2="192" y2="188" stroke="#000" stroke-width="2" />
+      <line x1="216" y1="196" x2="195" y2="200" stroke="#000" stroke-width="2" />
+      <line x1="304" y1="190" x2="328" y2="188" stroke="#000" stroke-width="2" />
+      <line x1="304" y1="196" x2="325" y2="200" stroke="#000" stroke-width="2" />
+      <!-- Collar & Gold Paw Medallion -->
+      <path d="M 235 228 Q 260 236 285 228" stroke="#DC2626" stroke-width="6" fill="none" />
+      <circle cx="260" cy="236" r="8" fill="url(#pawGold)" stroke="#000" stroke-width="2" />
+      <circle cx="260" cy="238" r="2.8" fill="#000" />
+      <circle cx="256" cy="233" r="1.2" fill="#000" />
+      <circle cx="260" cy="232" r="1.2" fill="#000" />
+      <circle cx="264" cy="233" r="1.2" fill="#000" />
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. VINTAGE BLUE CONVERTIBLE ROADSTER CAR -->
+  <!-- ========================================== -->
+  <g id="vintage-car">
+    <!-- Windshield frame -->
+    <path d="M 180 230 Q 260 215 340 230" stroke="#000" stroke-width="4.5" fill="none" stroke-linecap="round" />
+    <!-- Steering wheel -->
+    <path d="M 235 235 Q 260 220 285 235" stroke="#1E293B" stroke-width="5" fill="none" stroke-linecap="round" />
+
+    <!-- Car Hood & Body Frame -->
+    <path d="M 100 300 C 95 285, 120 270, 160 265 L 360 265 C 400 270, 425 285, 420 300 C 435 320, 445 365, 440 405 L 435 440 C 430 455, 410 465, 395 465 L 125 465 C 110 465, 90 455, 85 440 L 80 405 C 75 365, 85 320, 100 300 Z" fill="url(#carBodyBlue)" stroke="#000" stroke-width="4.5" />
+
+    <!-- Center Hood Scoop / Fin -->
+    <path d="M 235 340 C 235 315, 285 315, 285 340 L 275 375 L 245 375 Z" fill="#0F172A" stroke="#000" stroke-width="3" />
+    <line x1="242" y1="326" x2="278" y2="326" stroke="#334155" stroke-width="2.5" />
+    <line x1="240" y1="334" x2="280" y2="334" stroke="#334155" stroke-width="2.5" />
+    <line x1="242" y1="342" x2="278" y2="342" stroke="#334155" stroke-width="2.5" />
+
+    <!-- White Hood Stripes/Accents -->
+    <path d="M 140 310 C 130 350, 128 400, 135 425" stroke="#FFFFFF" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.9" />
+    <path d="M 380 310 C 390 350, 392 400, 385 425" stroke="#FFFFFF" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.9" />
+
+    <!-- Left Round Headlight -->
+    <g id="left-headlight">
+      <circle cx="140" cy="360" r="32" fill="#0A1E52" stroke="#000" stroke-width="4.5" />
+      <circle cx="140" cy="360" r="26" fill="#FFFFFF" stroke="#000" stroke-width="3" />
+      <circle cx="140" cy="360" r="19" fill="url(#headlightAmber)" stroke="#000" stroke-width="2.5" />
+      <circle cx="134" cy="354" r="5" fill="#FFF" opacity="0.7" />
+      <!-- Small outer fender mirror -->
+      <circle cx="75" cy="320" r="10" fill="#0A2268" stroke="#000" stroke-width="3.5" />
+      <path d="M 85 322 L 100 326" stroke="#000" stroke-width="3.5" />
+    </g>
+
+    <!-- Right Round Headlight -->
+    <g id="right-headlight">
+      <circle cx="380" cy="360" r="32" fill="#0A1E52" stroke="#000" stroke-width="4.5" />
+      <circle cx="380" cy="360" r="26" fill="#FFFFFF" stroke="#000" stroke-width="3" />
+      <circle cx="380" cy="360" r="19" fill="url(#headlightAmber)" stroke="#000" stroke-width="2.5" />
+      <circle cx="374" cy="354" r="5" fill="#FFF" opacity="0.7" />
+      <!-- Small outer fender mirror -->
+      <circle cx="445" cy="320" r="10" fill="#0A2268" stroke="#000" stroke-width="3.5" />
+      <path d="M 435 322 L 420 326" stroke="#000" stroke-width="3.5" />
+    </g>
+
+    <!-- Wheels / Tires Bottom Left & Right -->
+    <path d="M 88 405 C 88 385, 110 385, 110 405 L 110 470 C 110 482, 88 482, 88 470 Z" fill="#09090B" stroke="#000" stroke-width="3.5" />
+    <path d="M 410 405 C 410 385, 432 385, 432 405 L 432 470 C 432 482, 410 482, 410 470 Z" fill="#09090B" stroke="#000" stroke-width="3.5" />
+
+    <!-- Front Lower Grille -->
+    <rect x="175" y="390" width="170" height="26" rx="6" fill="#09090B" stroke="#000" stroke-width="3" />
+    <line x1="185" y1="398" x2="335" y2="398" stroke="#475569" stroke-width="2" />
+    <line x1="185" y1="406" x2="335" y2="406" stroke="#475569" stroke-width="2" />
+
+    <!-- Bumper bar connection rods -->
+    <rect x="170" y="420" width="14" height="24" rx="3" fill="#64748B" stroke="#000" stroke-width="2" />
+    <rect x="336" y="420" width="14" height="24" rx="3" fill="#64748B" stroke="#000" stroke-width="2" />
+
+    <!-- White Vintage Bumper Bar -->
+    <rect x="145" y="430" width="230" height="34" rx="17" fill="#FFFFFF" stroke="#000" stroke-width="4" />
+
+    <!-- Bumper Paw Badges -->
+    <g id="bumper-paws">
+      <!-- Left Paw Print -->
+      <ellipse cx="190" cy="447" rx="3" ry="4" fill="#000" />
+      <ellipse cx="184" cy="441" rx="1.5" ry="2" fill="#000" />
+      <ellipse cx="189" cy="439" rx="1.5" ry="2" fill="#000" />
+      <ellipse cx="194" cy="440" rx="1.5" ry="2" fill="#000" />
+
+      <!-- Center Gold Badge -->
+      <circle cx="260" cy="447" r="14" fill="url(#pawGold)" stroke="#000" stroke-width="2" />
+      <!-- Black Paw in center -->
+      <ellipse cx="260" cy="450" rx="4.5" ry="5.5" fill="#000" />
+      <circle cx="253" cy="443" r="2" fill="#000" />
+      <circle cx="258" cy="440" r="2" fill="#000" />
+      <circle cx="263" cy="440" r="2" fill="#000" />
+      <circle cx="267" cy="443" r="2" fill="#000" />
+
+      <!-- Right Paw Print -->
+      <ellipse cx="330" cy="447" rx="3" ry="4" fill="#000" />
+      <ellipse cx="324" cy="441" rx="1.5" ry="2" fill="#000" />
+      <ellipse cx="329" cy="439" rx="1.5" ry="2" fill="#000" />
+      <ellipse cx="334" cy="440" rx="1.5" ry="2" fill="#000" />
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. CENTER BUBBLE TEXT: "NANO" -->
+  <!-- ========================================== -->
+  <g id="nano-letters" filter="url(#softShadow)">
+    <!-- Letter N (1) -->
+    <g transform="translate(85, 230)">
+      <!-- Outer White Outline -->
+      <text x="0" y="70" font-family="'Arial Black', 'Impact', sans-serif" font-size="105" font-weight="900" fill="#FFF" stroke="#FFF" stroke-width="20" stroke-linejoin="round">N</text>
+      <!-- Black Shadow Outline -->
+      <text x="0" y="70" font-family="'Arial Black', 'Impact', sans-serif" font-size="105" font-weight="900" fill="#000" stroke="#000" stroke-width="12" stroke-linejoin="round">N</text>
+      <!-- Gradient Fill -->
+      <text x="0" y="70" font-family="'Arial Black', 'Impact', sans-serif" font-size="105" font-weight="900" fill="url(#nanoN1)">N</text>
+    </g>
+
+    <!-- Letter A -->
+    <g transform="translate(178, 240)">
+      <text x="0" y="70" font-family="'Arial Black', 'Impact', sans-serif" font-size="105" font-weight="900" fill="#FFF" stroke="#FFF" stroke-width="20" stroke-linejoin="round">A</text>
+      <text x="0" y="70" font-family="'Arial Black', 'Impact', sans-serif" font-size="105" font-weight="900" fill="#000" stroke="#000" stroke-width="12" stroke-linejoin="round">A</text>
+      <text x="0" y="70" font-family="'Arial Black', 'Impact', sans-serif" font-size="105" font-weight="900" fill="url(#nanoA)">A</text>
+    </g>
+
+    <!-- Letter N (2) -->
+    <g transform="translate(268, 235)">
+      <text x="0" y="70" font-family="'Arial Black', 'Impact', sans-serif" font-size="105" font-weight="900" fill="#FFF" stroke="#FFF" stroke-width="20" stroke-linejoin="round">N</text>
+      <text x="0" y="70" font-family="'Arial Black', 'Impact', sans-serif" font-size="105" font-weight="900" fill="#000" stroke="#000" stroke-width="12" stroke-linejoin="round">N</text>
+      <text x="0" y="70" font-family="'Arial Black', 'Impact', sans-serif" font-size="105" font-weight="900" fill="url(#nanoN2)">N</text>
+    </g>
+
+    <!-- Letter O -->
+    <g transform="translate(360, 242)">
+      <text x="0" y="70" font-family="'Arial Black', 'Impact', sans-serif" font-size="105" font-weight="900" fill="#FFF" stroke="#FFF" stroke-width="20" stroke-linejoin="round">O</text>
+      <text x="0" y="70" font-family="'Arial Black', 'Impact', sans-serif" font-size="105" font-weight="900" fill="#000" stroke="#000" stroke-width="12" stroke-linejoin="round">O</text>
+      <text x="0" y="70" font-family="'Arial Black', 'Impact', sans-serif" font-size="105" font-weight="900" fill="url(#nanoO)">O</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 5. BOTTOM TEXT: "CIRCUMCISION" -->
+  <!-- ========================================== -->
+  <g id="circumcision-text" filter="url(#softShadow)">
+    <!-- White Backing Banner -->
+    <rect x="15" y="525" width="490" height="75" rx="14" fill="#FFFFFF" stroke="#000" stroke-width="6" />
+
+    <!-- Multicolor Block Letters -->
+    <g font-family="'Arial Black', 'Impact', sans-serif" font-size="52" font-weight="900" text-anchor="middle">
+      <!-- C -->
+      <text x="45" y="582" fill="#F43F5E">C</text>
+      <!-- I -->
+      <text x="75" y="582" fill="#0284C7">I</text>
+      <!-- R -->
+      <text x="110" y="582" fill="#1D4ED8">R</text>
+      <!-- C -->
+      <text x="152" y="582" fill="#16A34A">C</text>
+      <!-- U -->
+      <text x="195" y="582" fill="#7C3AED">U</text>
+      <!-- M -->
+      <text x="245" y="582" fill="#DC2626">M</text>
+      <!-- C -->
+      <text x="295" y="582" fill="#EAB308">C</text>
+      <!-- I -->
+      <text x="325" y="582" fill="#0284C7">I</text>
+      <!-- S -->
+      <text x="358" y="582" fill="#E11D48">S</text>
+      <!-- I -->
+      <text x="390" y="582" fill="#EA580C">I</text>
+      <!-- O -->
+      <text x="428" y="582" fill="#22C55E">O</text>
+      <!-- N -->
+      <text x="472" y="582" fill="#2563EB">N</text>
+    </g>
+  </g>
+</svg>
