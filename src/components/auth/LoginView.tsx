@@ -21,12 +21,40 @@ export const LoginView: React.FC = () => {
     { id: 3, code: 'CABANG-02', name: 'Klinik Khitan Cabang Sidoarjo', isActive: true },
   ];
 
+  const [isMigrating, setIsMigrating] = useState(false);
+  const [successMsg, setSuccessMsg] = useState('');
+
   // Pastikan form login selalu bersih saat dimuat
   useEffect(() => {
     setUsername('');
     setPassword('');
     setErrorMsg('');
   }, []);
+
+  const handleAutoInitDatabase = async () => {
+    setIsMigrating(true);
+    setErrorMsg('');
+    setSuccessMsg('');
+    try {
+      let res = await fetch('/api/database/migrate', { method: 'POST' });
+      if (!res.ok) {
+        // Fallback to GET
+        res = await fetch('/api/database/migrate');
+      }
+      const data = await res.json();
+      if (data.success || res.ok) {
+        setSuccessMsg('✓ Database berhasil diinisialisasi! 34 tabel dan akun owner/admin siap digunakan. Klik tombol "Masuk Ke Sistem" di bawah.');
+        setUsername('owner');
+        setPassword('owner123');
+      } else {
+        throw new Error(data.error || 'Gagal membuat tabel database.');
+      }
+    } catch (err: any) {
+      setErrorMsg('Gagal inisialisasi database: ' + (err.message || 'Periksa variabel DATABASE_URL di Railway'));
+    } finally {
+      setIsMigrating(false);
+    }
+  };
 
   const handleStandardLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +68,7 @@ export const LoginView: React.FC = () => {
       return;
     }
     setErrorMsg('');
+    setSuccessMsg('');
     setIsLoading(true);
 
     try {
@@ -88,11 +117,48 @@ export const LoginView: React.FC = () => {
             </p>
           </div>
 
+          {/* Alert Success Box */}
+          {successMsg && (
+            <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-start gap-2.5 animate-in fade-in">
+              <Sparkles className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+              <span className="leading-snug">{successMsg}</span>
+            </div>
+          )}
+
           {/* Alert Error Box */}
           {errorMsg && (
-            <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-semibold flex items-start gap-2.5 animate-in fade-in">
-              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-              <span className="leading-snug">{errorMsg}</span>
+            <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-semibold space-y-2 animate-in fade-in">
+              <div className="flex items-start gap-2.5">
+                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                <span className="leading-snug">{errorMsg}</span>
+              </div>
+              
+              {/* Jika terdeteksi masalah tabel kosong / belum dibuat di database baru */}
+              {(errorMsg.toLowerCase().includes('users') || errorMsg.toLowerCase().includes('failed query') || errorMsg.toLowerCase().includes('database')) && (
+                <div className="pt-1 border-t border-rose-200/80">
+                  <button
+                    type="button"
+                    onClick={handleAutoInitDatabase}
+                    disabled={isMigrating}
+                    className="w-full mt-1 px-3 py-2 bg-gradient-to-r from-orange-600 to-rose-600 hover:from-orange-700 hover:to-rose-700 text-white rounded-xl text-xs font-bold shadow-xs hover:shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                  >
+                    {isMigrating ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        <span>Sedang Menyiapkan 34 Tabel Database...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-3.5 h-3.5" />
+                        <span>Klik di Sini: Buat Seluruh Tabel Database Otomatis</span>
+                      </>
+                    )}
+                  </button>
+                  <p className="text-[10px] text-slate-500 font-normal text-center mt-1">
+                    Cukup klik 1 kali tombol di atas untuk membuat seluruh 34 tabel dan akun owner/admin.
+                  </p>
+                </div>
+              )}
             </div>
           )}
 

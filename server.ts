@@ -1963,8 +1963,16 @@ app.post('/api/auth/login', async (req, res) => {
     const hashPassword = (p: string) => crypto.createHash('sha256').update(p).digest('hex');
     const inputHash = password ? hashPassword(password) : '';
 
-    // Search by email, uid, or prefix
-    let allUsers = await db.select().from(users);
+    // Search by email, uid, or prefix with auto-healing if schema/table not yet created
+    let allUsers;
+    try {
+      allUsers = await db.select().from(users);
+    } catch (queryErr: any) {
+      console.warn('[Login Auth Auto-Heal] Tabel users belum tersedia di database baru. Memulai inisialisasi tabel dan akun...', queryErr?.message || queryErr);
+      await ensureDatabaseSchema();
+      await seedInitialData();
+      allUsers = await db.select().from(users);
+    }
     
     // Auto-heal: If database was restored with schema but users table is empty, seed initial users
     if (!allUsers || allUsers.length === 0) {
@@ -9802,14 +9810,16 @@ app.post('/api/database/reset-transactions', requireAuth, async (req: AuthReques
   }
 });
 
-// 6. Manual / Triggered Schema Migration & Verification API
-app.post('/api/database/migrate', async (req, res) => {
+// 6. Manual / Triggered Schema Migration & Verification API (Both POST and GET for easy browser access)
+const handleDatabaseMigration = async (req: express.Request, res: express.Response) => {
   try {
     console.log('[API] Menjalankan perbaikan & migrasi struktur database atas permintaan pengguna/sistem...');
+    await ensureDatabaseSchema();
+    await seedInitialData();
     const logs = await runCompleteSchemaMigration();
     res.json({
       success: true,
-      message: 'Sinkronisasi dan perbaikan struktur database berhasil dijalankan!',
+      message: 'Sinkronisasi dan perbaikan struktur database berhasil dijalankan! Semua 34 tabel dan akun owner/admin siap digunakan.',
       logs,
       timestamp: new Date().toISOString()
     });
@@ -9817,7 +9827,11 @@ app.post('/api/database/migrate', async (req, res) => {
     console.error('API Migrate failed:', err);
     res.status(500).json({ error: 'Gagal menjalankan migrasi database: ' + (err.message || String(err)) });
   }
-});
+};
+
+app.post('/api/database/migrate', handleDatabaseMigration);
+app.get('/api/database/migrate', handleDatabaseMigration);
+app.get('/api/database/setup', handleDatabaseMigration);
 
 app.get('/api/database/migrate-status', async (req, res) => {
   try {

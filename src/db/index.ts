@@ -37,19 +37,39 @@ function isTransientError(err: any): boolean {
   );
 }
 
+function maskDbUrl(urlStr: string): string {
+  try {
+    const u = new URL(urlStr);
+    return `${u.protocol}//${u.username || 'user'}:****@${u.host}${u.pathname}`;
+  } catch {
+    return 'URL_TERPASANG';
+  }
+}
+
 // Function to create or retrieve the connection pool
 export const createPool = () => {
   if (!global._postgresPool) {
     let poolConfig: pg.PoolConfig;
 
-    if (process.env.DATABASE_URL) {
-      const isLocal = process.env.DATABASE_URL.includes('localhost') || process.env.DATABASE_URL.includes('127.0.0.1');
-      const isSocket = process.env.DATABASE_URL.startsWith('/') || process.env.DATABASE_URL.includes('cloudsql');
-      const isSslDisabled = process.env.DATABASE_URL.includes('sslmode=disable') || process.env.DB_SSL === 'false';
-      const requiresSsl = !isSslDisabled && !isSocket && (process.env.DB_SSL === 'true' || !isLocal);
+    const rawDbUrl = (
+      process.env.DATABASE_URL || 
+      process.env.DATABASE_PRIVATE_URL || 
+      process.env.DATABASE_PUBLIC_URL || 
+      process.env.POSTGRES_URL || 
+      ''
+    ).trim();
+
+    if (rawDbUrl) {
+      const isLocal = rawDbUrl.includes('localhost') || rawDbUrl.includes('127.0.0.1');
+      const isSocket = rawDbUrl.startsWith('/') || rawDbUrl.includes('cloudsql');
+      const isRailwayInternal = rawDbUrl.includes('.railway.internal');
+      const isSslDisabled = rawDbUrl.includes('sslmode=disable') || process.env.DB_SSL === 'false' || isRailwayInternal;
+      const requiresSsl = !isSslDisabled && !isSocket && (process.env.DB_SSL === 'true' || rawDbUrl.includes('sslmode=require') || (!isLocal && !isRailwayInternal));
+
+      console.log(`[Database Init] Menggunakan URL database: ${maskDbUrl(rawDbUrl)} (SSL: ${requiresSsl ? 'aktif' : 'non-aktif'})`);
 
       poolConfig = {
-        connectionString: process.env.DATABASE_URL,
+        connectionString: rawDbUrl,
         ssl: requiresSsl ? { rejectUnauthorized: false } : undefined,
         max: 10,
         connectionTimeoutMillis: 15000,
@@ -58,17 +78,35 @@ export const createPool = () => {
         keepAliveInitialDelayMillis: 10000,
       };
     } else {
-      const host = process.env.SQL_HOST || process.env.DB_HOST || 'localhost';
+      const host = (
+        process.env.PGHOST || 
+        process.env.SQL_HOST || 
+        process.env.DB_HOST || 
+        'localhost'
+      ).trim();
       const isSocket = typeof host === 'string' && (host.startsWith('/') || host.includes('cloudsql'));
       const isLocal = host === 'localhost' || host === '127.0.0.1';
-      const requiresSsl = !isSocket && (process.env.DB_SSL === 'true' || (!isLocal && process.env.DB_SSL !== 'false'));
+      const isRailwayInternal = host.includes('.railway.internal');
+      const isSslDisabled = process.env.DB_SSL === 'false' || isRailwayInternal;
+      const requiresSsl = !isSocket && !isSslDisabled && (process.env.DB_SSL === 'true' || (!isLocal && !isRailwayInternal));
+
+      const port = Number(process.env.PGPORT || process.env.SQL_PORT || process.env.DB_PORT) || 5432;
+      const user = process.env.PGUSER || process.env.SQL_ADMIN_USER || process.env.SQL_USER || process.env.DB_USER || 'postgres';
+      const password = process.env.PGPASSWORD || process.env.SQL_ADMIN_PASSWORD || process.env.SQL_PASSWORD || process.env.DB_PASSWORD || 'postgres';
+      const database = process.env.PGDATABASE || process.env.SQL_DB_NAME || process.env.DB_NAME || 'nano_clinic';
+
+      if (isLocal) {
+        console.warn(`[Database Warning] DATABASE_URL tidak terdeteksi. Mencoba koneksi lokal ke ${host}:${port}/${database}. Jika di Railway, pastikan variabel DATABASE_URL sudah dimasukkan di tab Variables!`);
+      } else {
+        console.log(`[Database Init] Menggunakan host: ${host}:${port}/${database} (User: ${user}, SSL: ${requiresSsl ? 'aktif' : 'non-aktif'})`);
+      }
 
       poolConfig = {
         host,
-        port: Number(process.env.SQL_PORT || process.env.DB_PORT) || 5432,
-        user: process.env.SQL_ADMIN_USER || process.env.SQL_USER || process.env.DB_USER || 'postgres',
-        password: process.env.SQL_ADMIN_PASSWORD || process.env.SQL_PASSWORD || process.env.DB_PASSWORD || 'postgres',
-        database: process.env.SQL_DB_NAME || process.env.DB_NAME || 'nano_clinic',
+        port,
+        user,
+        password,
+        database,
         ssl: isSocket ? false : (requiresSsl ? { rejectUnauthorized: false } : undefined),
         max: 10,
         connectionTimeoutMillis: 15000,
