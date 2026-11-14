@@ -1,0 +1,383 @@
+@import "tailwindcss";
+
+@layer base {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: #F8FAFC;
+    color: #0F172A;
+  }
+
+  #root {
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom Minimalist Desktop Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E1;
+}
+
+/* Dark/Clean scrollbar for sidebar navigation */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 9999px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E1;
+}
+
+/* Hidden outside print, visible in print */
+.print-only {
+  display: none !important;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm 8mm 10mm;
+  }
+
+  /* Reset layout constraints that break multi-page pagination */
+  html,
+  body {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  #root,
+  #root > div,
+  #root > div > div,
+  main,
+  .lg\:pl-60,
+  div[class*="overflow-hidden"],
+  div[class*="overflow-y-auto"] {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    position: static !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  /* When printing from modal, isolate and hide all background non-modal contents */
+  body:has(.print-modal-overlay) aside,
+  body:has(.print-modal-overlay) nav,
+  body:has(.print-modal-overlay) header,
+  body:has(.print-modal-overlay) footer,
+  body:has(.print-modal-overlay) #root > div > div > aside,
+  body:has(.print-modal-overlay) main > *:not(:has(.print-modal-overlay)),
+  body.is-printing-modal aside,
+  body.is-printing-modal nav,
+  body.is-printing-modal header,
+  body.is-printing-modal footer,
+  body.is-printing-modal #root > div > div > aside,
+  body.is-printing-modal main > *:not(:has(.print-modal-overlay)) {
+    display: none !important;
+  }
+
+  /* Isolated DP Receipt / Nota Sementara Print (Portaled directly under body) */
+  body.is-printing-dp-modal > *:not(.dp-print-modal-overlay) {
+    display: none !important;
+  }
+
+  .dp-print-modal-overlay {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .dp-print-modal-card {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* When printing from modal, neutralize fixed overlay backdrops and scrolling constraints */
+  .print-modal-overlay {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .print-modal-card {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  #consent-print-document,
+  #invoice-print-document,
+  #invoice-pos-document,
+  #dp-receipt-print-document,
+  #certificate-print-document,
+  #payroll-slip-print-document,
+  #financial-report-print-document {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .printable-area,
+  .print-area {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .dp-receipt-sheet {
+    background: #ffffff !important;
+    color: #000000 !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 4mm 6mm !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Dedicated 1-Page A4 Invoice */
+  .invoice-a4-page {
+    background: #ffffff !important;
+    color: #000000 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+    padding: 2mm 4mm !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    overflow: visible !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Dedicated 1-Page A4 Informed Consent */
+  .consent-1page {
+    background: #ffffff !important;
+    color: #000000 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+    padding: 2mm 4mm !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    overflow: visible !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .thermal-58 {
+    width: 58mm !important;
+    max-width: 58mm !important;
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+    margin: 0 auto !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .thermal-80 {
+    width: 80mm !important;
+    max-width: 80mm !important;
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    margin: 0 auto !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  /* Informed Consent Multi-Page A4 Print Styles: strictly 1 Sheet per Page */
+  .consent-sheet-page {
+    display: block !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 6mm 10mm !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    border: none !important;
+    box-shadow: none !important;
+    position: relative !important;
+    clear: both !important;
+  }
+
+  .consent-sheet-page:not(:last-child) {
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  .consent-sheet-page:last-child {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .print-page-break {
+    display: block !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    visibility: hidden !important;
+  }
+
+  /* Enforce clean, proportional Kop Surat Logo in Print */
+  .print-kop-logo,
+  img.print-kop-logo {
+    max-height: 48px !important;
+    max-width: 60px !important;
+    width: auto !important;
+    height: 48px !important;
+    object-fit: contain !important;
+    display: inline-block !important;
+  }
+
+  /* Table styles for reports */
+  table {
+    page-break-inside: auto !important;
+  }
+  tr {
+    page-break-inside: avoid !important;
+    page-break-after: auto !important;
+  }
+  thead {
+    display: table-header-group !important;
+  }
+  tfoot {
+    display: table-footer-group !important;
+  }
+
+  /* Product Sales Report Print Sheet */
+  .product-report-print-sheet {
+    display: block !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Doctor Prescription Box Print Enforcement (Informed Consent Lembar 3) */
+  .prescription-box,
+  .resep-box {
+    border: 2.5px solid #000000 !important;
+    border-radius: 4px !important;
+    box-sizing: border-box !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: #ffffff !important;
+  }
+}
+
+.print-kop-logo {
+  max-height: 54px;
+  max-width: 68px;
+  object-fit: contain;
+}

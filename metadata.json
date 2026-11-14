@@ -1,0 +1,6 @@
+{
+  "name": "CLINIC MANAGEMENT SYSTEM",
+  "description": "Sistem Manajemen Operasional Khusus Tindakan Khitan Nano Circumcision: Pasien, Booking, Tindakan Medis, Kasir, Fee Dokter, dan Laba Rugi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
